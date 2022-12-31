@@ -197,43 +197,46 @@ class CachedProperty:
         return value
 
 
+from typing import Union
+from functools import wraps
+import time
+
 def restrict_execution(max_per_second: int, second: Union[int, float] = 1):
     """
-    Ограничивает кол-во вызовов функции.
+    Ограничивает количество вызовов функции.
 
     Ограничивает вызовы декорируемой функции.
-    Счётчик сбрасывается в установленной время (по умолчанию 1 секунда).
+    Счётчик сбрасывается каждые `second` секунд (по умолчанию 1 секунда).
 
     Args:
-        max_per_second: int (кол-во вызовов за установленное время).
-        second: int (время, за которое ограничивается кол-во вызовов в сек).
+        max_per_second: int (максимальное количество вызовов за установленное время).
+        second: int (время, за которое ограничивается количество вызовов в секундах).
 
     Returns:
         Any (результат функции)
     """
 
     def decorate(func):
-        func_called = {}
+        class CallCounter:
+            def __init__(self):
+                self.last_time_call = 0
+                self.count_call = 0
+
+        counter = CallCounter()
 
         @wraps(func)
-        def restrict_execution_func(*args, **kwargs):
-            if not func_called.get(func.__name__):
-                func_called[func.__name__] = {
-                    'last_time_call': time.time(),
-                    'count_call': 0,
-                }
-            func_from_dict = func_called.get(func.__name__, {})
-            last_time_call = func_from_dict.get('last_time_call', time.time())
-            if time.time() - last_time_call > second:
-                func_from_dict['last_time_call'] = time.time()
-                func_from_dict['count_call'] = 0
-            if func_from_dict.get('count_call', 0) >= max_per_second:
+        def restricted_func(*args, **kwargs):
+            current_time = time.perf_counter()
+            if current_time - counter.last_time_call > second:
+                counter.last_time_call = current_time
+                counter.count_call = 0
+            if counter.count_call >= max_per_second:
                 name = func.__name__
                 raise CallFrequencyHigh(f'Превышена частота вызова {name}')
-            func_from_dict['count_call'] += 1
+            counter.count_call += 1
             return func(*args, **kwargs)
 
-        return restrict_execution_func
+        return restricted_func
 
     return decorate
 
@@ -273,3 +276,4 @@ def exit_after(max_time: Union[int, float]):
         return inner
 
     return outer
+
