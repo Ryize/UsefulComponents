@@ -4,3 +4,7 @@ class MismatchType(TypeError):
 
 class CallFrequencyHigh(AssertionError):
     pass
+
+
+class MaxSizeException(ValueError):
+    pass
