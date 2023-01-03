@@ -8,3 +8,7 @@ class CallFrequencyHigh(AssertionError):
 
 class MaxSizeException(ValueError):
     pass
+
+
+class IntervalError(ValueError):
+    pass
