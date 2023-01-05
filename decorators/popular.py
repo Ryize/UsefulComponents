@@ -1,8 +1,10 @@
 import logging
+import time
 import sys
 import threading
-import time
-from typing import Optional, Callable, Union
+from typing import Optional, Callable
+
+from typing import Union
 
 from errors.error import MismatchType, CallFrequencyHigh
 from functools import wraps
@@ -197,10 +199,6 @@ class CachedProperty:
         return value
 
 
-from typing import Union
-from functools import wraps
-import time
-
 def restrict_execution(max_per_second: int, second: Union[int, float] = 1):
     """
     Ограничивает количество вызовов функции.
@@ -276,4 +274,3 @@ def exit_after(max_time: Union[int, float]):
         return inner
 
     return outer
-
