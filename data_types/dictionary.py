@@ -5,7 +5,7 @@ from typing import Any, Callable
 
 class IndexDict(dict):
     """
-    Класс наследует от dict.
+    Класс-наследник dict, добавляет индексирование.
 
     Добавляет методы для работы со словарем по индексу
     и применение правила на все элементы словаря.
@@ -104,6 +104,10 @@ class IndexDict(dict):
     def _depth(cls, _dict) -> int:
         """
         Вспомогательный метод для определения глубины словаря.
+        Работает через рекурсию.
+
+        Args:
+            _dict (dict): словарь у которого определяется глубина
         """
         if isinstance(_dict, dict):
             return 1 + (max(map(cls._depth, _dict.values())) if _dict else 0)
