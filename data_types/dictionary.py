@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Callable
 
+from func.chatGPT import analyze_file
+
 
 class IndexDict(dict):
     """
@@ -160,3 +162,6 @@ class IndexDict(dict):
         for key, value in sorted_data:
             self[key] = value
         return self.__class__(sorted_data)
+
+
+analyze_file(__file__)
