@@ -164,4 +164,5 @@ class IndexDict(dict):
         return self.__class__(sorted_data)
 
 
-analyze_file(__file__)
+if __name__ == '__main__':
+    analyze_file(__file__)
