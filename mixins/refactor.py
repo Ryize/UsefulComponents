@@ -15,7 +15,7 @@ class PEP8NamingMixin:
                 if not re.match(r'^[a-z][a-zA-Z0-9_]+$', name):
                     raise ValueError(
                         f'Неверное имя метода {name}, '
-                        f'нарушение соглашения PEP8'
+                        f'Нарушение соглашения PEP8'
                     )
                 arg_spec = inspect.getfullargspec(value)
                 for arg in arg_spec.args:
