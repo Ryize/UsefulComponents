@@ -9,13 +9,13 @@ import os
 def analyze_file(file_path):
     file_size = os.path.getsize(file_path)
     if file_size > 2048:
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding='utf-8') as file:
             chunks = [file.read(2048) for _ in range(file_size // 2048 + 1)]
         for chunk in chunks:
             chatGPT = ChatGPT()
             chatGPT.thread_send(chunk)
     else:
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding='utf-8') as file:
             code = file.read()
             chatGPT = ChatGPT()
             chatGPT.thread_send(code)
