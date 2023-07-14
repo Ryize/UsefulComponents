@@ -22,21 +22,24 @@ def analyze_file(file_path):
 
 
 class ChatGPT:
-    __api_keys = ()
+    __api_keys = tuple()
 
     def __init__(self):
         openai.api_key = random.choice(self.__api_keys)
         self.model_engine = "text-davinci-003"
 
     def thread_send(self, *args, **kwargs):
-        threading.Thread(target=self.print_result, args=args, kwargs=kwargs).start()
+        threading.Thread(target=self.print_result, args=args,
+                         kwargs=kwargs).start()
         time.sleep(1)
 
     def print_result(self, data, *args, **kwargs):
         if data:
-            print(f'\n\n', '-' * 50, f'\nФрагмент кода: \n{data}\n Результат проверки:\n', self.send(
-                f'Проанализируй код, найди в нём синтаксические ошибки и баги. Оцени сам код от 1 до 10:\n{data}\nПиши на русском языке.',
-                *args, **kwargs).lstrip())
+            print(f'\n\n', '-' * 50,
+                  f'\nФрагмент кода: \n{data}\n Результат проверки:\n',
+                  self.send(
+                      f'Проанализируй код, найди в нём синтаксические ошибки и баги. Оцени сам код от 1 до 10:\n{data}\nПиши на русском языке.',
+                      *args, **kwargs).lstrip())
 
     def send(self, data) -> str:
         completion = openai.Completion.create(
