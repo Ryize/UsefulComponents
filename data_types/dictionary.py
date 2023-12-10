@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable
+from typing import Any, Callable, Hashable
 
 from func.chatGPT import analyze_file
 
@@ -46,7 +46,7 @@ class IndexDict(dict):
             return self.__class__({element_from_key[0]: element_from_key[1]})
         raise KeyError("Элемент или индекс не найдены!")
 
-    def __setitem__(self, key, value) -> None:
+    def __setitem__(self, key: Hashable, value: Any) -> None:
         """
         Переопределяет метод для задания значения элемента словаря по индексу.
         """
@@ -147,9 +147,10 @@ class IndexDict(dict):
                 self[k] = func(v)
         return _dict
 
-    def sort(self, key: Callable = lambda x: x[1], reverse: bool = False) -> IndexDict:
+    def sort(self, key: Callable = lambda x: x[1],
+             reverse: bool = False) -> IndexDict:
         """
-        Сортирует словарь по заданному ключу.
+        Сортирует словарь по заданному ключу
 
         Args:
             key (Callable): функция для сортировки
