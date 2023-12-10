@@ -64,7 +64,7 @@ class _FunctionalNumbers:
         """
         return self._create_class(math.tan(self * math.pi / 180))
 
-    def gcd(self, other: int, *args) -> int:
+    def gcd(self, *args) -> int:
         """
         Возвращает НОД (Наибольший общий делитель)
         для данного числа и переданных аргументов.
@@ -86,14 +86,13 @@ class _FunctionalNumbers:
             return self._create_class(int(str(self)))
         elif new_base == 10:
             return self._create_class(int(str(self), new_base))
-        else:
-            digits = []
-            value = self
-            while value > 0:
-                value, remainder = divmod(value, new_base)
-                digits.append(str(remainder))
-            digits.reverse()
-            return self._create_class(''.join(digits))
+        digits = []
+        value = self
+        while value > 0:
+            value, remainder = divmod(value, new_base)
+            digits.append(str(remainder))
+        digits.reverse()
+        return self._create_class(''.join(digits))
 
     def is_prime(self) -> bool:
         """
