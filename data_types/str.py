@@ -275,7 +275,8 @@ class WeakStr(str):
         index = self.find(old_substr)
         if index == -1:  # подстрока не найдена
             return self
-        return self._create_class(self[:index] + new_substr + self[index + len(old_substr):])
+        return self._create_class(
+            self[:index] + new_substr + self[index + len(old_substr):])
 
     def _create_class(self, *args, **kwargs) -> WeakStr:
         return self.__class__(*args, **kwargs)

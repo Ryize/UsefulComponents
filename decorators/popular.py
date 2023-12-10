@@ -149,7 +149,8 @@ def deprecated(func):
 
     @wraps(func)
     def new_func(*args, **kwargs):
-        logging.warning("Call to deprecated function {}.".format(func.__name__))
+        logging.warning(
+            "Call to deprecated function {}.".format(func.__name__))
         return func(*args, **kwargs)
 
     return new_func

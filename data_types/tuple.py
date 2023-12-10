@@ -102,4 +102,3 @@ class ModifiableTuple(tuple):
 
     def remove(self, element: Any):
         return self.__class__([value for value in self if value != element])
-    
