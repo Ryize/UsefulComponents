@@ -2,6 +2,14 @@
 
 Проект содержащий множество полезных декораторов, классов, функций, типов данных и тд.
 
+## Использованные технологии: 
+
+
+![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
+<br><br>
+
 ## Прежде всего:
 
 > Установите Python (если он не установлен)<br>
