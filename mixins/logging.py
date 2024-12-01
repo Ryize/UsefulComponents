@@ -23,7 +23,7 @@ class LoggingMixin(object):
 
 class LoggingToFileMixin:
     """
-    Записывает название функции, args, kwargs и результат раюоты в файл.
+    Записывает название функции, args, kwargs и результат работы в файл.
 
     Конструкция __name__ == '__main__' обязательна
     """
